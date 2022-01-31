@@ -17,6 +17,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import utilities.FunkinUtilities;
 
 class TitleState extends MusicBeatState
 {
@@ -46,29 +47,29 @@ class TitleState extends MusicBeatState
 			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 1.3, new FlxPoint(0, 1),
 				{asset: diamond, width: 32, height: 32}, new FlxRect(0, 0, FlxG.width, FlxG.height));
 
-			initialized = true;
-
 			FlxTransitionableState.defaultTransIn.tileData = {asset: diamond, width: 32, height: 32};
 			FlxTransitionableState.defaultTransOut.tileData = {asset: diamond, width: 32, height: 32};
 
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;
+
+			initialized = true;
 		}
 
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.stageback__png);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(FunkinUtilities.getFile('stageback'));
 		bg.antialiasing = true;
 		bg.setGraphicSize(Std.int(bg.width * 0.6));
 		bg.updateHitbox();
 		add(bg);
 
-		var logoBl:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.logo__png);
+		var logoBl:FlxSprite = new FlxSprite().loadGraphic(FunkinUtilities.getFile('logo'));
 		logoBl.screenCenter();
 		logoBl.color = FlxColor.BLACK;
 		add(logoBl);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.logo__png);
+		var logo:FlxSprite = new FlxSprite().loadGraphic(FunkinUtilities.getFile('logo'));
 		logo.screenCenter();
 		logo.antialiasing = true;
 		add(logo);
@@ -125,10 +126,7 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			FlxG.sound.music.stop();
 
-			new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				FlxG.switchState(new PlayState());
-			});
+			FlxG.switchState(new FreeplayState());
 			FlxG.sound.play('assets/music/titleShoot' + TitleState.soundExt, 0.7);
 		}
 

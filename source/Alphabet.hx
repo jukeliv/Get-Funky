@@ -74,8 +74,7 @@ class AlphaCharacter extends FlxSprite
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
-		var tex = FlxAtlasFrames.fromSparrow(AssetPaths.alphabet__png, AssetPaths.alphabet__xml);
-		frames = tex;
+		frames = utilities.FunkinUtilities.getFile('alphabet', utilities.FunkinUtilities.FunkinAssetType.SPARROW_ATLAS);
 
 		antialiasing = true;
 	}

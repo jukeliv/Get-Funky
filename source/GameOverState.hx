@@ -3,7 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.graphics.frames.FlxAtlasFrames;
+import utilities.FunkinUtilities;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -12,14 +12,15 @@ class GameOverState extends FlxTransitionableState
 {
 	override function create()
 	{
+		PlayState.instance.vocals.stop();
 		var loser:FlxSprite = new FlxSprite(100, 100);
-		var loseTex = FlxAtlasFrames.fromSparrow(AssetPaths.lose__png, AssetPaths.lose__xml);
+		var loseTex = FunkinUtilities.getFile('lose', FunkinAssetType.SPARROW_ATLAS);
 		loser.frames = loseTex;
 		loser.animation.addByPrefix('lose', 'lose', 24, false);
 		loser.animation.play('lose');
 		add(loser);
 
-		var restart:FlxSprite = new FlxSprite(500, 50).loadGraphic(AssetPaths.restart__png);
+		var restart:FlxSprite = new FlxSprite(500, 50).loadGraphic(FunkinUtilities.getFile('restart',FunkinAssetType.IMAGE));
 		restart.setGraphicSize(Std.int(restart.width * 0.6));
 		restart.updateHitbox();
 		restart.alpha = 0;

@@ -27,7 +27,9 @@ class PauseSubState extends FlxSubState
 			PlayerSettings.player1.controls.replaceBinding(Control.LEFT, Keys, FlxKey.J, null);
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (FlxG.keys.justPressed.ENTER){
+			PlayState.instance.boyfriend.stunned = false;
 			close();
+		}
 	}
 }

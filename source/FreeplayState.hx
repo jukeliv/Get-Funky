@@ -2,8 +2,8 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.text.FlxText;
+import utilities.FunkinUtilities;
 
 class FreeplayState extends MusicBeatState
 {
@@ -14,11 +14,9 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		// LOAD MUSIC
-
-		// LOAD CHARACTERS
-
-		var bg:FlxSprite = FlxGridOverlay.create(20, 20);
+		FlxG.sound.playMusic(FunkinUtilities.getFile('songs/${songs[curSelected]}',FunkinAssetType.MUSIC),0.7);
+		
+		var bg:FlxSprite = FunkinUtilities.getFile('stageback');
 		add(bg);
 
 		for (i in 0...songs.length)
@@ -41,17 +39,12 @@ class FreeplayState extends MusicBeatState
 	{
 		if (FlxG.keys.justPressed.UP)
 		{
-			curSelected -= 1;
+			changeSelected(-1);
 		}
 		if (FlxG.keys.justPressed.DOWN)
 		{
-			curSelected += 1;
+			changeSelected(1);
 		}
-
-		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
-			curSelected = 0;
 
 		selector.y = (70 * curSelected) + 30;
 
@@ -62,5 +55,13 @@ class FreeplayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+	}
+	private function changeSelected(change:Int){
+		curSelected+=change;
+		if (curSelected < 0)
+			curSelected = songs.length - 1;
+		if (curSelected >= songs.length)
+			curSelected = 0;
+		FlxG.sound.playMusic(FunkinUtilities.getFile('songs/${songs[curSelected]}',FunkinAssetType.MUSIC),0.7);
 	}
 }

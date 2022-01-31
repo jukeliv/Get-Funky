@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
+import utilities.FunkinUtilities;
 import flixel.util.FlxColor;
 
 class Note extends FlxSprite
@@ -41,7 +41,7 @@ class Note extends FlxSprite
 
 		this.noteData = noteData;
 
-		var tex = FlxAtlasFrames.fromSparrow(AssetPaths.NOTE_assets__png, AssetPaths.NOTE_assets__xml);
+		var tex = FunkinUtilities.getFile('NOTE_assets', FunkinAssetType.SPARROW_ATLAS);
 		frames = tex;
 		animation.addByPrefix('greenScroll', 'green0');
 		animation.addByPrefix('redScroll', 'red0');
