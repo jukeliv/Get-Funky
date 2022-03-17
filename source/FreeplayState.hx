@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
@@ -22,6 +23,7 @@ class FreeplayState extends MusicBeatState
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(40, (70 * i) + 30, songs[i]);
+			//songText.defColor = FlxColor.BLUE;
 			add(songText);
 		}
 

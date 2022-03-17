@@ -1,5 +1,6 @@
 package utilities;
 
+import lime.text.Font;
 import lime.utils.Assets;
 import flixel.graphics.frames.FlxAtlasFrames;
 
@@ -13,25 +14,29 @@ class FunkinUtilities {
     * Asset Type "SPARROW_ATLAS"
     */
     public static function getFile(file:String,?type:FunkinAssetType = IMAGE):Dynamic{
-        if(type == IMAGE)
-            return 'assets/images/$file.png';
-        else if(type == FONT)
-            return 'assets/fonts/$file';
-        else if(type == XML)
-            return 'assets/images/$file.xml';
-        else if(type == INSTRUMENTAL)
-            return getFile('songs/${file}_Inst',FunkinAssetType.MUSIC);
-        else if(type == VOICES)
-            return getFile('songs/${file}_Voices',FunkinAssetType.MUSIC);
-        else if(type == MUSIC)
-            return 'assets/music/$file.$soundExt';
-        else if(type == JSON)
-            return 'assets/data/$file.json'
-        else if(type == SPARROW_ATLAS)
-            return FlxAtlasFrames.fromSparrow(getFile(file,IMAGE),getFile(file,XML));
-        else if(type == TXT)
-            return 'assets/data/$file.txt';
-        return 'assets/$file';
+        var daType = type;
+        switch(daType){
+            case IMAGE:
+                return 'assets/images/$file.png';
+            case FONT:
+                return 'assets/fonts/$file';
+            case XML:
+                return 'assets/images/$file.xml';
+            case INSTRUMENTAL:
+                return getFile('songs/${file}_Inst',FunkinAssetType.MUSIC);
+            case VOICES:
+                return getFile('songs/${file}_Voices',FunkinAssetType.MUSIC);
+            case MUSIC:
+                return 'assets/music/$file.$soundExt';
+            case JSON:
+                return 'assets/data/$file.json';
+            case SPARROW_ATLAS:
+                return FlxAtlasFrames.fromSparrow(getFile(file,IMAGE),getFile(file,XML));
+            case TXT:
+                return 'assets/data/$file.txt';
+            default:
+                return 'assets/$file';
+        }
     }
     public static function getTextArray(file:String):Array<String>{
         return (Assets.getText(getFile(file,FunkinAssetType.TXT)).trim().split('\n'));
